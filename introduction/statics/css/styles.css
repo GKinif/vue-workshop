@@ -8,6 +8,9 @@ body {
     box-sizing: border-box;
     padding: 15px;
     background-color: #E5DBC9;
+    border-radius: 10px;
+    color: #534D56;
+    box-shadow: 6px 8px 40px 0px rgba(0,0,0,0.2);
 }
 
 #app h1 {
@@ -22,6 +25,11 @@ ul {
 
 .todo {
     display: flex;
+    align-items: center;
+    border: solid 1px #534D56;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height: 35px;
 }
 
 .todo span {
