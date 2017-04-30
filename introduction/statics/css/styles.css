@@ -1,0 +1,66 @@
+body {
+    background-color: #534D56;
+}
+
+#app {
+    width: 400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #E5DBC9;
+}
+
+#app h1 {
+    text-align: center;
+    color: #534D56;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo {
+    display: flex;
+}
+
+.todo span {
+    flex: 1;
+}
+
+.todo input[type="text"] {
+    flex: 1;
+    padding-left: 30px;
+}
+
+.todo input[type="checkbox"] {
+    margin-right: 20px;
+}
+
+.deleteBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.deleteBtn circle {
+    fill: none;
+    stroke: #534D56;
+    stroke-width: 2;
+}
+
+.deleteBtn line {
+    stroke-width: 2;
+    stroke: #534D56;
+}
+
+.completed {
+    text-decoration-line: line-through;
+    color: grey;
+}
+
+input {
+    border: none;
+    border-bottom: solid 1px #534D56;
+    background-color: transparent;
+}

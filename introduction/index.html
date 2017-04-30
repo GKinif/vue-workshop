@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Vue</title>
+    <link rel="stylesheet" href="statics/css/styles.css">
+</head>
+<body>
+<div id="app">
+    <h1>TODOS</h1>
+    <label for="newTodo">Add new Todo: </label>
+    <input type="text" id="newTodo" v-model="private.newTodoTxt" @change="addTodo" />
+    <todo-list :todo-list="shared.todoList" :filter="private.filter" inline-template>
+        <ul>
+            <todo v-for="todo in filteredTodo" :key="todo.id" :todo="todo" :delete-todo="deleteTodo" />
+        </ul>
+    </todo-list>
+    <div class="filters" v-if="shared.todoList.length">
+        <span>Active items: {{ activeCount }}</span>
+        <input type="radio" id="filterAll" value="all" v-model="private.filter">
+        <label for="filterAll">All</label>
+
+        <input type="radio" id="filterActive" value="active" v-model="private.filter">
+        <label for="filterActive">Active</label>
+
+        <input type="radio" id="filterCompleted" value="completed" v-model="private.filter">
+        <label for="filterCompleted">Completed</label>
+    </div>
+</div>
+
+<script type="text/x-template" id="user-template">
+    <li class="todo">
+        <input v-if="!isEditing" type="checkbox" v-model="todo.isCompleted" @change="updateCompleted" />
+        <span v-if="!isEditing" @dblclick="toggleEdit" :class="{ completed: todo.isCompleted }">{{ todo.text }}</span>
+        <button class="deleteBtn" v-if="!isEditing" type="button" @click="onDeleteClick">
+            <svg width="20" height="20">
+                <circle cx="10" cy="10" r="9" />
+                <line x1="3" y1="3" x2="17" y2="17" />
+                <line x1="17" y1="3" x2="3" y2="17" />
+            </svg>
+        </button>
+        <input v-show="isEditing" type="text" v-model="todo.text" @change="updateText" @blur="updateText" ref="input" />
+    </li>
+</script>
+
+<script src="statics/js/vendors/vue.2.3.0.js"></script>
+<script src="statics/js/app.js"></script>
+</body>
+</html>
