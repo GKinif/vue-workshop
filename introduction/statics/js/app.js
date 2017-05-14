@@ -1,7 +1,7 @@
 var Todo = {
     name: 'Todo',
-    template: '#user-template',
-    props: ['todo', 'deleteTodo'],
+    template: '#todo-template',
+    props: ['todo', 'deleteTodo', 'isEditable'],
     data: function() {
         return {
             isEditing: false,
@@ -9,6 +9,9 @@ var Todo = {
     },
     methods: {
         toggleEdit: function toggleEdit() {
+            if (!this.isEditable) {
+                return;
+            }
             if (!this.isEditing && this.$refs.input) {
                 // weird trick to force focus after the element has been shown
                 setTimeout(function() {
@@ -37,7 +40,14 @@ var Todo = {
 
 var TodoList = {
     name: 'TodoList',
-    props: ['todoList', 'filter'],
+    props: {
+        todoList: {
+            type: Array,
+            required: true
+        },
+        filter: String,
+        isEditable: Boolean
+    },
     computed: {
         filteredTodo: function() {
             if (!this.filter || this.filter === 'all') {
@@ -63,10 +73,15 @@ var TodoList = {
     },
     components: {
         todo: Todo,
-    }
+    },
+    template: '' +
+    '<ul>' +
+    '<todo v-for="todo in filteredTodo" :key="todo.id" :todo="todo" :is-editable="isEditable" :delete-todo="deleteTodo" />' +
+    '</ul>',
 };
 
 new Vue({
+    name: 'app',
     el: '#app',
     data: {
         shared: store.state,

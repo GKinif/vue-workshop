@@ -2,9 +2,9 @@ body {
     background-color: #534D56;
 }
 
-#app {
+#app, #todomin {
     width: 400px;
-    margin: 0 auto;
+    margin: 0 auto 25px auto;
     box-sizing: border-box;
     padding: 15px;
     background-color: #E5DBC9;
@@ -34,15 +34,12 @@ ul {
 
 .todo span {
     flex: 1;
+    margin-left: 20px;
 }
 
 .todo input[type="text"] {
     flex: 1;
     padding-left: 30px;
-}
-
-.todo input[type="checkbox"] {
-    margin-right: 20px;
 }
 
 .deleteBtn {
