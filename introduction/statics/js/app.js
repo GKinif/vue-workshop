@@ -28,6 +28,13 @@ var Todo = {
             this.todo.text = e.target.value;
             this.updateStore();
         },
+        onInputBlur: function onInputBlur(e) {
+            if (this.todo.text !== e.target.value) {
+                this.updateText();
+            } else {
+                this.isEditing = false;
+            }
+        },
         updateCompleted: function updateCompleted(e) {
             this.todo.isCompleted = e.target.checked;
             this.updateStore();

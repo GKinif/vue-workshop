@@ -49,7 +49,7 @@
                 <line x1="17" y1="3" x2="3" y2="17" />
             </svg>
         </button>
-        <input v-show="isEditing" type="text" v-model="todo.text" @change="updateText" @blur="updateText" ref="input" />
+        <input v-show="isEditing" type="text" v-model="todo.text" @change="updateText" @blur="onInputBlur" ref="input" />
     </li>
 </script>
 
