@@ -6,55 +6,12 @@
 </head>
 <body>
 <div id="app">
-    <div id="mainTodoList">
-        <h1>TODOS</h1>
-        <label for="newTodo">Add new Todo: </label>
-        <input type="text" id="newTodo" v-model="private.newTodoTxt" @change="addTodo" />
-        <todo-list
-                :todo-list="shared.todoList"
-                :filter="private.filter"
-                :is-editable="true">
-        </todo-list>
-        <div class="filters" v-if="shared.todoList.length">
-            <span>Active items: {{ activeCount }}</span>
-            <input type="radio" id="filterAll" value="all" v-model="private.filter">
-            <label for="filterAll">All</label>
-
-            <input type="radio" id="filterActive" value="active" v-model="private.filter">
-            <label for="filterActive">Active</label>
-
-            <input type="radio" id="filterCompleted" value="completed" v-model="private.filter">
-            <label for="filterCompleted">Completed</label>
-        </div>
-    </div>
-
-    <div id="secondTodoList">
-        <h2>TODOS to do</h2>
-        <todo-list
-                :todo-list="shared.todoList"
-                :filter="'active'"
-                :is-editable="false">
-        </todo-list>
-    </div>
+    <h1>{{ hello }}</h1>
 </div>
 
-<script type="text/x-template" id="todo-template">
-    <li class="todo">
-        <input v-if="isEditable && !isEditing" type="checkbox" v-model="todo.isCompleted" @change="updateCompleted" />
-        <span v-if="!isEditing" @dblclick="toggleEdit" :class="{ completed: todo.isCompleted }">{{ todo.text }}</span>
-        <button class="deleteBtn" v-if="isEditable && !isEditing" type="button" @click="onDeleteClick">
-            <svg width="20" height="20">
-                <circle cx="10" cy="10" r="9" />
-                <line x1="3" y1="3" x2="17" y2="17" />
-                <line x1="17" y1="3" x2="3" y2="17" />
-            </svg>
-        </button>
-        <input v-show="isEditing" type="text" v-model="todo.text" @change="updateText" @blur="onInputBlur" ref="input" />
-    </li>
-</script>
+
 
 <script src="statics/js/vendors/vue.2.3.0.js"></script>
-<script src="statics/js/store.js"></script>
 <script src="statics/js/app.js"></script>
 </body>
 </html>
