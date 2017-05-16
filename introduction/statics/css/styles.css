@@ -2,7 +2,76 @@ body {
     background-color: #534D56;
 }
 
+#app, #todomin {
+    width: 400px;
+    margin: 0 auto;
+
+}
+
+#mainTodoList, #secondTodoList {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    margin-bottom: 25px;
+    background-color: #E5DBC9;
+    border-radius: 10px;
+    color: #534D56;
+    box-shadow: 6px 8px 40px 0px rgba(0,0,0,0.2);
+}
 
 #app h1 {
     text-align: center;
+    /*color: #534D56;*/
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    border: solid 1px #534D56;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height: 35px;
+}
+
+.todo span {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.todo input[type="text"] {
+    flex: 1;
+    padding-left: 30px;
+}
+
+.deleteBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.deleteBtn circle {
+    fill: none;
+    stroke: #534D56;
+    stroke-width: 2;
+}
+
+.deleteBtn line {
+    stroke-width: 2;
+    stroke: #534D56;
+}
+
+.completed {
+    text-decoration-line: line-through;
+    color: grey;
+}
+
+input {
+    border: none;
+    border-bottom: solid 1px #534D56;
+    background-color: transparent;
 }
