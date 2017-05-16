@@ -57,20 +57,26 @@ var TodoList = {
     },
     computed: {
         filteredTodo: function() {
-            if (!this.filter || this.filter === 'all') {
-                return this.todoList;
+            var filtered = [];
+
+            switch(this.filter) {
+                case 'completed':
+                    filtered = this.todoList.filter(function(todo) {
+                        return todo.isCompleted;
+                    });
+                    break;
+                case 'active':
+                    filtered = this.todoList.filter(function(todo) {
+                        return !todo.isCompleted;
+                    });
+                    break;
+                case 'all':
+                default:
+                    filtered = this.todoList;
+                    break;
             }
-            if (this.filter === 'completed') {
-                return this.todoList.filter(function(todo) {
-                    return todo.isCompleted;
-                });
-            } else if (this.filter === 'active') {
-                return this.todoList.filter(function(todo) {
-                    return !todo.isCompleted;
-                });
-            }
-            // just in case a wrong filter was passed
-            return this.todoList;
+
+            return filtered;
         },
     },
     methods: {
@@ -82,9 +88,9 @@ var TodoList = {
         todo: Todo,
     },
     template: '' +
-    '<ul>' +
-    '<todo v-for="todo in filteredTodo" :key="todo.id" :todo="todo" :is-editable="isEditable" :delete-todo="deleteTodo" />' +
-    '</ul>',
+        '<ul>' +
+        '<todo v-for="todo in filteredTodo" :key="todo.id" :todo="todo" :is-editable="isEditable" :delete-todo="deleteTodo" />' +
+        '</ul>',
 };
 
 new Vue({
