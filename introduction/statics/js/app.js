@@ -1,7 +1,7 @@
 var Todo = {
     name: 'Todo',
     template: '#todo-template',
-    props: ['todo', 'deleteTodo', 'isEditable'],
+    props: ['todo', 'deleteTodo', 'isEditable', 'updateTodo'],
     data: function() {
         return {
             isEditing: false,
@@ -20,24 +20,21 @@ var Todo = {
             }
             this.isEditing = !this.isEditing;
         },
-        updateStore: function() {
-            store.updateTodo(this.todo);
-        },
-        updateText: function updateText(e) {
+        updateTodoText: function updateText(e) {
             this.isEditing = false;
             this.todo.text = e.target.value;
-            this.updateStore();
+            this.updateTodo(this.todo);
         },
         onInputBlur: function onInputBlur(e) {
             if (this.todo.text !== e.target.value) {
-                this.updateText();
+                this.updateTodoText();
             } else {
                 this.isEditing = false;
             }
         },
         updateCompleted: function updateCompleted(e) {
             this.todo.isCompleted = e.target.checked;
-            this.updateStore();
+            this.updateTodo(this.todo);
         },
         onDeleteClick: function onDeleteClick() {
             this.deleteTodo(this.todo.id);
@@ -50,10 +47,18 @@ var TodoList = {
     props: {
         todoList: {
             type: Array,
-            required: true
+            required: true,
         },
         filter: String,
-        isEditable: Boolean
+        isEditable: Boolean,
+        deleteTodo: {
+            type: Function,
+            required: true,
+        },
+        updateTodo: {
+            type: Function,
+            required: true,
+        },
     },
     computed: {
         filteredTodo: function() {
@@ -79,17 +84,12 @@ var TodoList = {
             return filtered;
         },
     },
-    methods: {
-        deleteTodo: function deleteTodo(id) {
-            store.deleteTodo(id);
-        },
-    },
     components: {
         todo: Todo,
     },
     template: '' +
         '<ul>' +
-        '<todo v-for="todo in filteredTodo" :key="todo.id" :todo="todo" :is-editable="isEditable" :delete-todo="deleteTodo" />' +
+        '<todo v-for="todo in filteredTodo" :key="todo.id" :todo="todo" :is-editable="isEditable" :delete-todo="deleteTodo" :update-todo="updateTodo" />' +
         '</ul>',
 };
 
@@ -114,6 +114,12 @@ new Vue({
         addTodo: function() {
             store.addTodo(this.private.newTodoTxt) ;
             this.private.newTodoTxt = '';
+        },
+        deleteTodo: function deleteTodo(id) {
+            store.deleteTodo(id);
+        },
+        updateTodo: function(todo) {
+            store.updateTodo(todo);
         },
     },
     components: {

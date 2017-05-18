@@ -13,7 +13,9 @@
         <todo-list
                 :todo-list="shared.todoList"
                 :filter="private.filter"
-                :is-editable="true">
+                :is-editable="true"
+                :update-todo="updateTodo"
+                :delete-todo="deleteTodo">
         </todo-list>
         <div class="filters" v-if="shared.todoList.length">
             <span>Active items: {{ activeCount }}</span>
@@ -31,9 +33,11 @@
     <div id="secondTodoList">
         <h2>TODOS to do</h2>
         <todo-list
-                :todo-list="shared.todoList"
-                :filter="'active'"
-                :is-editable="false">
+            :todo-list="shared.todoList"
+            :filter="'active'"
+            :is-editable="false"
+            :update-todo="updateTodo"
+            :delete-todo="deleteTodo">
         </todo-list>
     </div>
 </div>
@@ -49,7 +53,7 @@
                 <line x1="17" y1="3" x2="3" y2="17" />
             </svg>
         </button>
-        <input v-show="isEditing" type="text" v-model="todo.text" @change="updateText" @blur="onInputBlur" ref="input" />
+        <input v-show="isEditing" type="text" v-model="todo.text" @change="updateTodoText" @blur="onInputBlur" ref="input" />
     </li>
 </script>
 
